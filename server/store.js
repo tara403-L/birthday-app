@@ -59,12 +59,12 @@ function getMatches() {
  * P(at least one match) = 1 - (365 * 364 * ... * (365-N+1)) / 365^N
  */
 function birthdayProbability(n) {
-  if (n <= 1) return "0%";
+  if (n <= 1) return "0.00000%";
   let p = 1;
   for (let i = 0; i < n; i++) {
     p *= (365 - i) / 365;
   }
-  return ((1 - p) * 100).toFixed(1) + "%";
+  return ((1 - p) * 100).toFixed(5) + "%";
 }
 
 /**
@@ -72,8 +72,8 @@ function birthdayProbability(n) {
  * "K matches" = K distinct birth-dates that appear at least twice among N people.
  */
 function probabilityAtLeastKMatches(n, k, trials = 50000) {
-  if (n <= 1 || k <= 0) return "100%";
-  if (k > n) return "0%";
+  if (n <= 1 || k <= 0) return "100.00000%";
+  if (k > n) return "0.00000%";
   let count = 0;
   for (let t = 0; t < trials; t++) {
     const freq = {};
@@ -84,7 +84,7 @@ function probabilityAtLeastKMatches(n, k, trials = 50000) {
     const matchCount = Object.values(freq).filter((c) => c >= 2).length;
     if (matchCount >= k) count++;
   }
-  return ((count / trials) * 100).toFixed(1) + "%";
+  return ((count / trials) * 100).toFixed(5) + "%";
 }
 
 module.exports = {
