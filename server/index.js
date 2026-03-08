@@ -35,7 +35,8 @@ function requireAdminPassword(req, res, next) {
   next();
 }
 
-// POST /api/submit — accept { name, month, day }
+// POST /api/submit — accept { name, month, day }. No IP or server-side duplicate check;
+// only the client uses localStorage, so incognito windows count as new students.
 app.post("/api/submit", (req, res) => {
   const { name, month, day } = req.body || {};
   if (!name || month == null || day == null) {

@@ -19,6 +19,8 @@ export default function StudentPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // Duplicate check is localStorage-only: no IP or server-side dedupe.
+  // Incognito / other devices have no 'submitted' flag, so they count as new students.
   useEffect(() => {
     if (localStorage.getItem("submitted") === "true") {
       navigate("/waiting");
