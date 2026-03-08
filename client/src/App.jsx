@@ -25,12 +25,14 @@ function AppRoutes() {
       .then((r) => r.json())
       .then((data) => {
         if (data.revealed) navigate("/reveal");
+        else setCount(data.count ?? 0);
       })
       .catch(() => {});
-  }, [navigate, location.pathname]);
+  }, [navigate, location.pathname, setCount]);
 
   useEffect(() => {
-    const socket = io(window.location.origin, { path: "/socket.io", transports: ["polling", "websocket"] });
+    // Connect to same origin (no localhost) so Socket.io works in production (e.g. Railway)
+    const socket = io(undefined, { path: "/socket.io", transports: ["polling", "websocket"] });
 
     socket.on("count_update", (data) => {
       setCount(data.count ?? 0);
