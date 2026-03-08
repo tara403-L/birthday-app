@@ -33,7 +33,7 @@ export default function RevealPage() {
     );
   }
 
-  const { matches = [], probability = "0%", total = 0 } = data;
+  const { matches = [], probability = "0%", probabilityThisManyOrMore, total = 0, numMatches = 0 } = data;
   const hasMatches = matches.length > 0;
 
   return (
@@ -63,19 +63,29 @@ export default function RevealPage() {
           )}
         </section>
 
-        <section>
-          <h2 className="text-lg font-bold text-near-black mb-3 border-b-2 border-gold pb-2">Probability</h2>
-          <div className="bg-light-gray rounded-card p-6">
-            <p className="text-near-black">
-              In a group of <strong>{total}</strong> students, there is a{" "}
-              <span className="text-gold font-bold text-2xl">{probability}</span> chance two people share a birthday
-              {hasMatches ? " — and it happened!" : "."}
-            </p>
+        <section className="mb-8">
+          <h2 className="text-lg font-bold text-near-black mb-3 border-b-2 border-gold pb-2">Probability stats</h2>
+          <div className="space-y-4">
+            <div className="bg-light-gray rounded-card p-6">
+              <p className="text-sm font-semibold text-near-black mb-1">1. Standard Birthday Problem</p>
+              <p className="text-near-black">
+                Chance that <em>at least two</em> people in a group of <strong>{total}</strong> share any birthday:{" "}
+                <span className="text-gold font-bold text-2xl">{probability}</span>
+                {hasMatches ? " — and it happened!" : "."}
+              </p>
+            </div>
+            <div className="bg-light-gray rounded-card p-6">
+              <p className="text-sm font-semibold text-near-black mb-1">2. This many matches or more</p>
+              <p className="text-near-black">
+                Chance of getting <strong>{hasMatches ? numMatches : 0}</strong> or more separate birthday matches (pairs/groups) in a group of <strong>{total}</strong>:{" "}
+                <span className="text-gold font-bold text-2xl">{probabilityThisManyOrMore ?? "—"}</span>
+              </p>
+            </div>
           </div>
         </section>
       </main>
       <footer className="bg-charcoal text-white py-4 px-4 text-center text-sm">
-        Free University of Georgia — Probability Lecture
+        ალბათობა და სტატისტიკა
       </footer>
     </div>
   );

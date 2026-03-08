@@ -20,7 +20,7 @@ export default function WaitingPage() {
         </div>
       </main>
       <footer className="bg-charcoal text-white py-4 px-4 text-center text-sm">
-        Free University of Georgia — Probability Lecture
+        ალბათობა და სტატისტიკა
       </footer>
     </div>
   );

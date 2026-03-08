@@ -149,7 +149,7 @@ export default function AdminPage() {
         </div>
       </main>
       <footer className="py-4 px-4 text-center text-white/80 text-sm">
-        Free University of Georgia — Admin
+        ალბათობა და სტატისტიკა
       </footer>
     </div>
   );

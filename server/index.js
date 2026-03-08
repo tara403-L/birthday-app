@@ -13,6 +13,7 @@ const {
   clearAll,
   getMatches,
   birthdayProbability,
+  probabilityAtLeastKMatches,
 } = require("./store");
 
 const app = express();
@@ -70,10 +71,14 @@ app.get("/api/results", (req, res) => {
   const total = getCount();
   const matches = getMatches();
   const probability = birthdayProbability(total);
+  const numMatches = matches.length;
+  const probabilityThisManyOrMore = probabilityAtLeastKMatches(total, numMatches);
   res.json({
     matches,
     probability,
+    probabilityThisManyOrMore,
     total,
+    numMatches,
   });
 });
 
@@ -86,8 +91,10 @@ app.post("/api/reveal", requireAdminPassword, (req, res) => {
   const total = getCount();
   const matches = getMatches();
   const probability = birthdayProbability(total);
-  io.emit("reveal", { matches, probability, total });
-  res.json({ success: true, matches, probability, total });
+  const numMatches = matches.length;
+  const probabilityThisManyOrMore = probabilityAtLeastKMatches(total, numMatches);
+  io.emit("reveal", { matches, probability, probabilityThisManyOrMore, total, numMatches });
+  res.json({ success: true, matches, probability, probabilityThisManyOrMore, total, numMatches });
 });
 
 // POST /api/reset — clear all (admin)

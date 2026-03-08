@@ -67,6 +67,26 @@ function birthdayProbability(n) {
   return ((1 - p) * 100).toFixed(1) + "%";
 }
 
+/**
+ * P(at least K distinct shared birthdays) via Monte Carlo simulation.
+ * "K matches" = K distinct birth-dates that appear at least twice among N people.
+ */
+function probabilityAtLeastKMatches(n, k, trials = 50000) {
+  if (n <= 1 || k <= 0) return "100%";
+  if (k > n) return "0%";
+  let count = 0;
+  for (let t = 0; t < trials; t++) {
+    const freq = {};
+    for (let i = 0; i < n; i++) {
+      const b = Math.floor(Math.random() * 365) + 1;
+      freq[b] = (freq[b] || 0) + 1;
+    }
+    const matchCount = Object.values(freq).filter((c) => c >= 2).length;
+    if (matchCount >= k) count++;
+  }
+  return ((count / trials) * 100).toFixed(1) + "%";
+}
+
 module.exports = {
   store,
   addSubmission,
@@ -78,4 +98,5 @@ module.exports = {
   clearAll,
   getMatches,
   birthdayProbability,
+  probabilityAtLeastKMatches,
 };
