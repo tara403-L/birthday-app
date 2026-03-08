@@ -58,7 +58,7 @@ export default function RevealPage() {
             </ul>
           ) : (
             <p className="bg-light-gray rounded-card p-6 text-near-black text-lg">
-              დამთხვევა არ არის! შემთხვევას ძლიერად გადააჭერით.
+              დამთხვევა არ გვაქვს...
             </p>
           )}
         </section>

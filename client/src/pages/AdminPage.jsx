@@ -78,8 +78,8 @@ export default function AdminPage() {
     return (
       <div className="min-h-screen bg-charcoal text-white flex flex-col">
         <main className="flex-1 px-4 py-8 max-w-md mx-auto w-full flex flex-col justify-center">
-          <h1 className="text-2xl font-bold mb-4">ადმინ</h1>
-          <p className="text-white/80 mb-4">შეიყვანეთ ადმინ პაროლი გასაგრძელებლად.</p>
+          <h1 className="text-2xl font-bold mb-4">ადმინის პანელი</h1>
+          <p className="text-white/80 mb-4">შეიყვანეთ ადმინის პაროლი</p>
           <input
             type="password"
             value={password}
