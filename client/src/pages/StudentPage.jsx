@@ -43,7 +43,7 @@ export default function StudentPage() {
       return;
     }
     if (!month || !day) {
-      setError("აირჩიეთ დაბადების დღე (თვე და დღე).");
+      setError("აირჩიეთ დაბადების დღე.");
       return;
     }
     setLoading(true);
@@ -72,7 +72,6 @@ export default function StudentPage() {
     <div className="min-h-screen bg-white text-near-black flex flex-col">
       <main className="flex-1 px-4 py-8 max-w-md mx-auto w-full">
         <h1 className="text-2xl font-bold text-near-black mb-2">დაბადების დღის აპი</h1>
-        <p className="text-near-black mb-6">შეიყვანეთ სახელი და დაბადების დღე. ლექტორი გამოაჩენს ვის აქვს ერთი დაბადების დღე.</p>
 
         <form onSubmit={handleSubmit} className="bg-light-gray rounded-card p-6">
           <label className="block text-near-black font-semibold mb-2">შეიყვანეთ სახელი და გვარი</label>
@@ -86,7 +85,7 @@ export default function StudentPage() {
           />
 
           <div className="mt-4">
-            <span className="block text-near-black font-semibold mb-2">დაბადების დღე (თვე და დღე)</span>
+            <span className="block text-near-black font-semibold mb-2">დაბადების დღე</span>
             <div className="flex gap-3">
               <select
                 value={month}

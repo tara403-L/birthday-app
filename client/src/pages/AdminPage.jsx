@@ -110,12 +110,12 @@ export default function AdminPage() {
         <div className="bg-light-gray rounded-card p-6 text-near-black mb-6">
           <p className="text-lg">
             <span className="font-bold text-gold text-2xl">{submissions.length}</span>
-            <span className="ml-2">სტუდენტმა გაგზავნა</span>
+            <span className="ml-2">სტუდენტმა გამოგზავნა</span>
           </p>
         </div>
 
         <div className="mb-6">
-          <h2 className="text-lg font-bold border-b-2 border-gold pb-2 mb-3">გაგზავნილი სახელები</h2>
+          <h2 className="text-lg font-bold border-b-2 border-gold pb-2 mb-3">მონაწილეები</h2>
           {submissions.length === 0 ? (
             <p className="text-white/80">ჯერ გაგზავნილი არ არის.</p>
           ) : (
