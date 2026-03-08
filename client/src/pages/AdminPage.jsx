@@ -26,7 +26,7 @@ export default function AdminPage() {
         setAuthenticated(true);
       })
       .catch(() => {
-        setError("Invalid password.");
+        setError("არასწორი პაროლი.");
       })
       .finally(() => setLoading(false));
   };
@@ -51,12 +51,12 @@ export default function AdminPage() {
         if (data.error) setError(data.error);
         else navigate("/reveal");
       })
-      .catch(() => setError("Request failed"))
+      .catch(() => setError("მოთხოვნა ვერ შესრულდა"))
       .finally(() => setActionLoading(""));
   };
 
   const handleReset = () => {
-    if (!confirm("Clear all submissions and send everyone back to the form?")) return;
+    if (!confirm("წავშალოთ ყველა გაგზავნა და ყველა დავაბრუნოთ ფორმაზე?")) return;
     setActionLoading("reset");
     fetch("/api/reset", {
       method: "POST",
@@ -70,7 +70,7 @@ export default function AdminPage() {
           setSubmissions([]);
         }
       })
-      .catch(() => setError("Request failed"))
+      .catch(() => setError("მოთხოვნა ვერ შესრულდა"))
       .finally(() => setActionLoading(""));
   };
 
@@ -78,13 +78,13 @@ export default function AdminPage() {
     return (
       <div className="min-h-screen bg-charcoal text-white flex flex-col">
         <main className="flex-1 px-4 py-8 max-w-md mx-auto w-full flex flex-col justify-center">
-          <h1 className="text-2xl font-bold mb-4">Admin</h1>
-          <p className="text-white/80 mb-4">Enter the admin password to continue.</p>
+          <h1 className="text-2xl font-bold mb-4">ადმინ</h1>
+          <p className="text-white/80 mb-4">შეიყვანეთ ადმინ პაროლი გასაგრძელებლად.</p>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
+            placeholder="პაროლი"
             className="w-full bg-light-gray text-near-black px-4 py-3 min-h-[48px] rounded-none focus:outline-none focus:ring-2 focus:ring-gold"
             onKeyDown={(e) => e.key === "Enter" && loadDashboard()}
           />
@@ -95,7 +95,7 @@ export default function AdminPage() {
             disabled={loading}
             className="mt-4 w-full bg-near-black text-white font-semibold py-4 min-h-[48px] rounded-none hover:opacity-90 disabled:opacity-60"
           >
-            {loading ? "Checking…" : "Enter"}
+            {loading ? "შემოწმება…" : "შესვლა"}
           </button>
         </main>
       </div>
@@ -105,19 +105,19 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen bg-charcoal text-white flex flex-col">
       <main className="flex-1 px-4 py-8 max-w-lg mx-auto w-full">
-        <h1 className="text-2xl font-bold mb-6">Admin dashboard</h1>
+        <h1 className="text-2xl font-bold mb-6">ადმინ პანელი</h1>
 
         <div className="bg-light-gray rounded-card p-6 text-near-black mb-6">
           <p className="text-lg">
             <span className="font-bold text-gold text-2xl">{submissions.length}</span>
-            <span className="ml-2">students have submitted</span>
+            <span className="ml-2">სტუდენტმა გაგზავნა</span>
           </p>
         </div>
 
         <div className="mb-6">
-          <h2 className="text-lg font-bold border-b-2 border-gold pb-2 mb-3">Submitted names</h2>
+          <h2 className="text-lg font-bold border-b-2 border-gold pb-2 mb-3">გაგზავნილი სახელები</h2>
           {submissions.length === 0 ? (
-            <p className="text-white/80">No submissions yet.</p>
+            <p className="text-white/80">ჯერ გაგზავნილი არ არის.</p>
           ) : (
             <ul className="bg-light-gray rounded-card p-4 text-near-black max-h-48 overflow-y-auto">
               {submissions.map((s, i) => (
@@ -136,7 +136,7 @@ export default function AdminPage() {
             disabled={actionLoading !== "" || submissions.length === 0}
             className="w-full bg-near-black text-white font-semibold py-4 min-h-[48px] rounded-none hover:opacity-90 disabled:opacity-60"
           >
-            {actionLoading === "reveal" ? "Revealing…" : "Reveal results"}
+            {actionLoading === "reveal" ? "გამოჩენა…" : "შედეგების გამოჩენა"}
           </button>
           <button
             type="button"
@@ -144,7 +144,7 @@ export default function AdminPage() {
             disabled={actionLoading !== ""}
             className="w-full bg-white text-near-black font-semibold py-4 min-h-[48px] rounded-none hover:bg-light-gray disabled:opacity-60"
           >
-            {actionLoading === "reset" ? "Resetting…" : "Reset session"}
+            {actionLoading === "reset" ? "ჩატვირთვა…" : "თავიდან დაწყება"}
           </button>
         </div>
       </main>

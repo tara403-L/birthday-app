@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useApp } from "../App";
 
 const MONTHS = [
-  { value: 1, label: "January" }, { value: 2, label: "February" }, { value: 3, label: "March" },
-  { value: 4, label: "April" }, { value: 5, label: "May" }, { value: 6, label: "June" },
-  { value: 7, label: "July" }, { value: 8, label: "August" }, { value: 9, label: "September" },
-  { value: 10, label: "October" }, { value: 11, label: "November" }, { value: 12, label: "December" },
+  { value: 1, label: "იანვარი" }, { value: 2, label: "თებერვალი" }, { value: 3, label: "მარტი" },
+  { value: 4, label: "აპრილი" }, { value: 5, label: "მაისი" }, { value: 6, label: "ივნისი" },
+  { value: 7, label: "ივლისი" }, { value: 8, label: "აგვისტო" }, { value: 9, label: "სექტემბერი" },
+  { value: 10, label: "ოქტომბერი" }, { value: 11, label: "ნოემბერი" }, { value: 12, label: "დეკემბერი" },
 ];
 const DAYS = Array.from({ length: 31 }, (_, i) => i + 1);
 
@@ -39,11 +39,11 @@ export default function StudentPage() {
     e.preventDefault();
     setError("");
     if (!name.trim()) {
-      setError("Please enter your name.");
+      setError("შეიყვანეთ სახელი.");
       return;
     }
     if (!month || !day) {
-      setError("Please select your birthday (month and day).");
+      setError("აირჩიეთ დაბადების დღე (თვე და დღე).");
       return;
     }
     setLoading(true);
@@ -55,14 +55,14 @@ export default function StudentPage() {
       });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error || "Submission failed.");
+        setError(data.error || "გაგზავნა ვერ მოხდა.");
         return;
       }
       localStorage.setItem("submitted", "true");
       setCount(data.count ?? 0);
       navigate("/waiting");
     } catch {
-      setError("Network error. Please try again.");
+      setError("შეცდომა. სცადეთ თავიდან.");
     } finally {
       setLoading(false);
     }
@@ -71,22 +71,22 @@ export default function StudentPage() {
   return (
     <div className="min-h-screen bg-white text-near-black flex flex-col">
       <main className="flex-1 px-4 py-8 max-w-md mx-auto w-full">
-        <h1 className="text-2xl font-bold text-near-black mb-2">Birthday Collision</h1>
-        <p className="text-near-black mb-6">Enter your name and birthday. Your lecturer will reveal who shares a birthday.</p>
+        <h1 className="text-2xl font-bold text-near-black mb-2">დაბადების დღის აპი</h1>
+        <p className="text-near-black mb-6">შეიყვანეთ სახელი და დაბადების დღე. ლექტორი გამოაჩენს ვის აქვს ერთი დაბადების დღე.</p>
 
         <form onSubmit={handleSubmit} className="bg-light-gray rounded-card p-6">
-          <label className="block text-near-black font-semibold mb-2">Full name</label>
+          <label className="block text-near-black font-semibold mb-2">შეიყვანეთ სახელი და გვარი</label>
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="e.g. Alice Smith"
+            placeholder="მაგ. გიორგი გიორგაძე"
             className="w-full bg-white border border-gray-300 px-4 py-3 text-near-black text-lg min-h-[48px] rounded-none focus:outline-none focus:ring-2 focus:ring-gold"
             required
           />
 
           <div className="mt-4">
-            <span className="block text-near-black font-semibold mb-2">Birthday (month & day)</span>
+            <span className="block text-near-black font-semibold mb-2">დაბადების დღე (თვე და დღე)</span>
             <div className="flex gap-3">
               <select
                 value={month}
@@ -94,7 +94,7 @@ export default function StudentPage() {
                 className="flex-1 bg-white border border-gray-300 px-3 py-3 text-near-black text-base min-h-[48px] rounded-none focus:outline-none focus:ring-2 focus:ring-gold"
                 required
               >
-                <option value="">Month</option>
+                <option value="">აირჩიეთ თვე</option>
                 {MONTHS.map((m) => (
                   <option key={m.value} value={m.value}>{m.label}</option>
                 ))}
@@ -105,7 +105,7 @@ export default function StudentPage() {
                 className="flex-1 bg-white border border-gray-300 px-3 py-3 text-near-black text-base min-h-[48px] rounded-none focus:outline-none focus:ring-2 focus:ring-gold"
                 required
               >
-                <option value="">Day</option>
+                <option value="">აირჩიეთ დღე</option>
                 {DAYS.map((d) => (
                   <option key={d} value={d}>{d}</option>
                 ))}
@@ -120,7 +120,7 @@ export default function StudentPage() {
             disabled={loading}
             className="mt-6 w-full bg-near-black text-white font-semibold py-4 min-h-[48px] rounded-none hover:opacity-90 disabled:opacity-60"
           >
-            {loading ? "Submitting…" : "Submit"}
+            {loading ? "იგზავნება…" : "გაგზავნა"}
           </button>
         </form>
       </main>
