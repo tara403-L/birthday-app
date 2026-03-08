@@ -53,10 +53,11 @@ app.post("/api/submit", (req, res) => {
   res.json({ success: true, count });
 });
 
-// GET /api/count — submission count + revealed status
+// GET /api/count — submission count + revealed status (numeric count from store)
 app.get("/api/count", (req, res) => {
+  const count = getCount();
   res.json({
-    count: getCount(),
+    count: Number(count),
     revealed: isRevealed(),
   });
 });
@@ -102,10 +103,11 @@ app.get("/api/admin/submissions", (req, res) => {
   if (password !== ADMIN_PASSWORD) {
     return res.status(403).json({ error: "Invalid admin password" });
   }
+  const submissions = getSubmissionsForAdmin();
   res.json({
-    count: getCount(),
+    count: Number(submissions.length),
     revealed: isRevealed(),
-    submissions: getSubmissionsForAdmin(),
+    submissions,
   });
 });
 

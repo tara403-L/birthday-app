@@ -4,7 +4,7 @@ import { useApp } from "../App";
 
 export default function AdminPage() {
   const navigate = useNavigate();
-  const { count: liveCount } = useApp();
+  const { count: liveCount } = useApp(); // used to refetch when socket updates count
   const [password, setPassword] = useState("");
   const [authenticated, setAuthenticated] = useState(false);
   const [error, setError] = useState("");
@@ -109,7 +109,7 @@ export default function AdminPage() {
 
         <div className="bg-light-gray rounded-card p-6 text-near-black mb-6">
           <p className="text-lg">
-            <span className="font-bold text-gold text-2xl">{liveCount}</span>
+            <span className="font-bold text-gold text-2xl">{submissions.length}</span>
             <span className="ml-2">students have submitted</span>
           </p>
         </div>
@@ -133,7 +133,7 @@ export default function AdminPage() {
           <button
             type="button"
             onClick={handleReveal}
-            disabled={actionLoading !== "" || liveCount === 0}
+            disabled={actionLoading !== "" || submissions.length === 0}
             className="w-full bg-near-black text-white font-semibold py-4 min-h-[48px] rounded-none hover:opacity-90 disabled:opacity-60"
           >
             {actionLoading === "reveal" ? "Revealing…" : "Reveal results"}
